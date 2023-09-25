@@ -4,6 +4,7 @@ const { Schema, model } = require('mongoose');
 const userSchema = new Schema(
   {
     username: { type: String, required: true, unique: true, trim: true },
+    /* need a validator for email */
     email: { type: String, required: true, unique: true },
     thoughts: [
       {
@@ -27,6 +28,10 @@ const userSchema = new Schema(
     id: false,
   }
 );
+
+userSchema.virtual('friendCount').get(function () {
+  return this.friends.length;
+});
 
 const User = mongoose.model('User', userSchema);
 

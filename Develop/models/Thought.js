@@ -10,6 +10,7 @@ const thoughtSchema = new Schema(
         minLength: 1,
         maxLength: 200,
       },
+      /* use a getter method to format the timestamp on query */
     createdAt: {
       type: Date,
       default: Date.now,
@@ -29,6 +30,12 @@ const thoughtSchema = new Schema(
 );
 
 // Create a virtual property `getTags` that gets the amount of tags associated with an application
+thoughtSchema
+  .virtual('reactionCount')
+  // Getter
+  .get(function () {
+    return this.reactions.length;
+  });
 
 // Initialize our Thought model
 const Thought = model('thought', thoughtSchema);
