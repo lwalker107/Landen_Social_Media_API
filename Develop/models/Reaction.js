@@ -19,6 +19,9 @@ const reactionSchema = new Schema(
     createdAt: {
         type: Date,
         default: Date.now,
+        toJSON: {
+          getters: true,
+        },
       },
   },
   {
@@ -29,9 +32,5 @@ const reactionSchema = new Schema(
   }
 );
 
-// Create a virtual property `getTags` that gets the amount of tags associated with an application
 
-// Initialize our Thought model
-const Reaction = model('reaction', reactionSchema);
-
-module.exports = Reaction;
+module.exports = reactionSchema;
