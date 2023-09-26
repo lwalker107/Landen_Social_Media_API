@@ -90,37 +90,37 @@ module.exports = {
     }
   },
   // TODO: Add comments to the functionality of the addTag method
-  async addTag(req, res) {
+  async addReaction(req, res) {
     try {
-      const application = await Application.findOneAndUpdate(
-        { _id: req.params.applicationId },
-        { $addToSet: { tags: req.body } },
+      const thought = await Thought.findOneAndUpdate(
+        { _id: req.params.thoughtId },
+        { $addToSet: { reactions: req.body } },
         { runValidators: true, new: true }
       );
 
-      if (!application) {
-        return res.status(404).json({ message: 'No application with this id!' });
+      if (!thought) {
+        return res.status(404).json({ message: 'No thought with this id!' });
       }
 
-      res.json(application);
+      res.json(thought);
     } catch (err) {
       res.status(500).json(err);
     }
   },
   // TODO: Add comments to the functionality of the addTag method
-  async removeTag(req, res) {
+  async removeReaction(req, res) {
     try {
-      const application = await Application.findOneAndUpdate(
-        { _id: req.params.applicationId },
-        { $pull: { tags: { tagId: req.params.tagId } } },
+      const thought = await Thought.findOneAndUpdate(
+        { _id: req.params.thoughtId },
+        { $pull: { tags: { tagId: req.params.reactionId } } },
         { runValidators: true, new: true }
       );
 
-      if (!application) {
-        return res.status(404).json({ message: 'No application with this id!' });
+      if (!thought) {
+        return res.status(404).json({ message: 'No thought with this id!' });
       }
 
-      res.json(application);
+      res.json(thought);
     } catch (err) {
       res.status(500).json(err);
     }
