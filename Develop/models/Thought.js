@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 const reactionSchema = require('./Reaction');
+const moment = require('moment');
 
 // Schema to create Post model
 const thoughtSchema = new Schema(
@@ -14,6 +15,7 @@ const thoughtSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now,
+      get: (createdAtVal) => moment(createdAtVal).format('MMM DD, YYYY [at] hh:mm a')
     },
     username: {
       type: String,
@@ -24,6 +26,7 @@ const thoughtSchema = new Schema(
   {
     toJSON: {
       virtuals: true,
+      getters: true,
     },
     id: false,
   }
@@ -32,9 +35,9 @@ const thoughtSchema = new Schema(
 // Create a virtual property `getTags` that gets the amount of tags associated with an application
 thoughtSchema
   .virtual('reactionCount')
-  // Getter
+  // Get total reaction count
   .get(function () {
-    return this.reactions.length;
+    return `reactions: ${this.reactions.length}`;
   });
 
 // Initialize our Thought model
