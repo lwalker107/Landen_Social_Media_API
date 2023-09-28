@@ -22,7 +22,6 @@ module.exports = {
       res.status(500).json(err);
     }
   },
-  // TODO: Add comments to the functionality of the createApplication method
   async createThought(req, res) {
     try {
       const thought = await Thought.create(req.body);
@@ -44,7 +43,6 @@ module.exports = {
       res.status(500).json(err);
     }
   },
-  // TODO: Add comments to the functionality of the updateApplication method
   async updateThought(req, res) {
     try {
       const thought = await Thought.findOneAndUpdate(
@@ -63,7 +61,6 @@ module.exports = {
       res.status(500).json(err);
     }
   },
-  // TODO: Add comments to the functionality of the deleteApplication method
   async deleteThought(req, res) {
     try {
       const thought = await Thought.findOneAndRemove({ _id: req.params.thoughtId });
@@ -89,7 +86,7 @@ module.exports = {
       res.status(500).json(err);
     }
   },
-  // TODO: Add comments to the functionality of the addTag method
+
   async addReaction(req, res) {
     try {
       const thought = await Thought.findOneAndUpdate(
@@ -107,12 +104,12 @@ module.exports = {
       res.status(500).json(err);
     }
   },
-  // TODO: Add comments to the functionality of the addTag method
+
   async removeReaction(req, res) {
     try {
       const thought = await Thought.findOneAndUpdate(
         { _id: req.params.thoughtId },
-        { $pull: { tags: { tagId: req.params.reactionId } } },
+        { $pull: { reactions: { reactionId: req.params.reactionId } } },
         { runValidators: true, new: true }
       );
 
