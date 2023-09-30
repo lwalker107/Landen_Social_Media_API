@@ -1,4 +1,4 @@
-# Landen AutoReadMe Generator
+# Landen Backend Social Media Site
 ![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)
 
 ## Title
